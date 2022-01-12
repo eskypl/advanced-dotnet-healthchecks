@@ -1,0 +1,26 @@
+version: '3.4'
+
+services:
+  advanced.health.checks:
+    image: advanced.health.checks
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8080:80
+    depends_on:
+      - mongo
+      - redis
+
+  mongo:
+    image: mongo
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+
+  redis:
+    image: redis
+    ports:
+      - 6379:6379
